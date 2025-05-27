@@ -1,33 +1,35 @@
+import Chat from '../components/Chat';
+
 export default function Home() {
   return (
-    <div className="font-sans text-black bg-white">
-      <nav className="flex justify-between items-center px-[6%] py-6 border-b border-gray-200">
-        <a href="#" className="text-xl font-bold">ZapMEI</a>
-        <div className="hidden md:flex gap-8 text-sm text-gray-700">
-          <a href="#features" className="hover:text-[#10A37F]">Recursos</a>
-          <a href="#pricing" className="hover:text-[#10A37F]">Preços</a>
-          <a href="#docs" className="hover:text-[#10A37F]">Documentação</a>
-          <a href="#login" className="hover:text-[#10A37F]">Entrar</a>
-        </div>
-      </nav>
-
-      <section className="max-w-5xl mx-auto px-4 text-center mt-20 mb-10">
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">Atendimento Automatizado no WhatsApp com IA</h1>
-        <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10">
-          Transforme suas conversas em vendas com nossa inteligência artificial especializada em atendimento ao cliente
-        </p>
-        <a href="#" className="inline-block bg-[#10A37F] hover:bg-[#0d8c6d] text-white font-medium px-8 py-4 rounded-md text-base transition">
-          Começar Gratuitamente
+    <div className="bg-white min-h-screen flex flex-col items-center px-4 py-20 text-black font-sans">
+      <header className="text-center max-w-3xl mb-16">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-6">O jeito mais fácil de automatizar seu WhatsApp</h1>
+        <p className="text-lg sm:text-xl text-gray-600 mb-8">Fale com a IA e ela monta seu atendimento em minutos.</p>
+        <a href="#chat" className="inline-block bg-black text-white px-6 py-3 rounded-full text-base font-medium hover:bg-gray-900 transition">
+          Fale com a IA agora
         </a>
+      </header>
+
+      <section id="chat" className="w-full flex justify-center mb-20">
+        <Chat />
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 mb-20">
-        <img
-          src="https://via.placeholder.com/1200x600"
-          alt="Interface do Chat"
-          className="w-full rounded-xl border border-gray-200 shadow-xl"
-        />
-      </div>
+      <section className="max-w-2xl w-full px-4">
+        <h2 className="text-xl font-semibold mb-6">Perguntas Frequentes (FAQ)</h2>
+        <div className="mb-4">
+          <h3 className="font-bold">Quanto custa?</h3>
+          <p>Você pode começar de graça. Só paga se quiser recursos avançados.</p>
+        </div>
+        <div className="mb-4">
+          <h3 className="font-bold">Preciso saber programar?</h3>
+          <p>Não. Basta conversar com a IA e ela cria tudo para você.</p>
+        </div>
+        <div className="mb-4">
+          <h3 className="font-bold">Funciona no meu número pessoal?</h3>
+          <p>Sim! Você usa o WhatsApp que já tem, sem precisar mudar nada.</p>
+        </div>
+      </section>
     </div>
   );
 }
