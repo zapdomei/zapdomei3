@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Chat() {
   const [messages, setMessages] = useState([
     { from: 'bot', text: 'Oi, sou o Zap do MEI. Me conta o que você vende e eu crio seu robô automático de atendimento no WhatsApp, de graça. Bora?' }
   ]);
   const [input, setInput] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -19,23 +20,35 @@ export default function Chat() {
     setInput('');
   };
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   return (
-    <div className="w-full max-w-md">
-      <div className="border p-4 h-96 overflow-y-scroll bg-white rounded shadow">
+    <div className="flex flex-col w-full max-w-2xl mx-auto h-screen bg-[#f7f7f8] text-sm">
+      <div className="flex-1 overflow-y-auto px-4 pt-6 pb-32">
         {messages.map((msg, idx) => (
-          <div key={idx} className={`mb-2 text-${msg.from === 'bot' ? 'left' : 'right'}`}>
-            <p className={`text-sm ${msg.from === 'bot' ? 'text-gray-700' : 'text-blue-600'}`}>{msg.text}</p>
+          <div key={idx} className={`mb-4 flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
+            <div className={`max-w-[80%] px-4 py-2 rounded-xl ${msg.from === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}>
+              {msg.text}
+            </div>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
-      <div className="mt-2 flex">
-        <input
-          className="flex-1 border rounded p-2"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-        />
-        <button className="ml-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={handleSend}>Enviar</button>
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t p-4">
+        <div className="flex max-w-2xl mx-auto">
+          <input
+            className="flex-1 border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none"
+            value={input}
+            placeholder="Digite sua mensagem..."
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          />
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-r-md" onClick={handleSend}>
+            Enviar
+          </button>
+        </div>
       </div>
     </div>
   );
